@@ -129,27 +129,35 @@ while True:
     print("")
 
     while True:
-        keuze = input("Kies voor 'letter' of 'woord' om het geheime woord te raden ")
-        if keuze == "letter":
+        keuze = input("Kies voor 'l' of 'w' om het geheime woord te raden ")
+        if keuze == "l":
             letter_speler = input("Geef je letter op ")
-            if letter_speler.isalpha() == True: 
-                if letter_speler in geheime_woord2:
-                    teller = teller + 1
+            if letter_speler.isalpha() == True:
+                if len(letter_speler) == 1:
+                    if letter_speler in goede_letters:
+                        print("Dit letter heb je al geraden.")
+                    if letter_speler in foute_letters:
+                        print("Dit letter heb je al geraden.")
+                        letters()
+                    if letter_speler in geheime_woord2:
+                        teller = teller + 1
                   #  for i in range(geheime_woord2):
-                    goede_letters += letter_speler
-                    letters()
+                        goede_letters += letter_speler
+                        letters()
+                    if (letter_speler not in geheime_woord2) and (letter_speler not in foute_letters):                   
+                        foute_letters += letter_speler
+                        print(foute_letters)
+                        print("fout")
+                        aantal_fouten = aantal_fouten + 1
+                        galg(aantal_fouten)
                 else:
-                    foute_letters += letter_speler
-                    print(foute_letters)
-                    print("fout")
-                    aantal_fouten = aantal_fouten + 1
-                    galg(aantal_fouten)
+                    print("Geef 1 letter op.")
             elif letter_speler.isalpha() == False:
                 print("kies een letter")
             else:
                 print("kies een letter")
            
-        elif keuze == "woord":
+        elif keuze == "w":
            woord_speler = input("Geef je woord op ")
            if woord_speler == geheime_woord2:
                teller = teller + 1
